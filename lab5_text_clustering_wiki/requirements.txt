@@ -1,0 +1,5 @@
+wikipedia
+spacy
+scikit-learn
+scipy
+matplotlib
