@@ -1,0 +1,20 @@
+name: "✨ Feature request"
+description: "Предложи улучшение или новую фичу"
+labels: ["feature"]
+body:
+  - type: textarea
+    id: value
+    attributes:
+      label: Зачем это нужно?
+      placeholder: Какая польза / метрика
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Идея реализации
+      placeholder: Что и где поменять
+  - type: textarea
+    id: extra
+    attributes:
+      label: Скрины/референсы
