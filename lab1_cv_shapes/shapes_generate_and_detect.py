@@ -1,13 +1,16 @@
-import numpy as np
 import cv2
 import matplotlib.pyplot as plt
-from matplotlib.path import Path
+import numpy as np
 from matplotlib.patches import PathPatch
+from matplotlib.path import Path
+
 
 def create_soft_polygon(ax, origin, size, sides, color, smoothing=0.1, thickness=2):
     shift = np.pi / sides
     angle_array = np.linspace(0, 2 * np.pi, sides, endpoint=False) + shift
-    points = np.stack((np.cos(angle_array), np.sin(angle_array)), axis=1) * size + origin
+    points = (
+        np.stack((np.cos(angle_array), np.sin(angle_array)), axis=1) * size + origin
+    )
 
     path_pts = []
     path_cmds = []
@@ -18,10 +21,10 @@ def create_soft_polygon(ax, origin, size, sides, color, smoothing=0.1, thickness
         current = points[idx]
         next_ = points[(idx + 1) % sides]
 
-        in_vec = (current - prev)
+        in_vec = current - prev
         in_vec = in_vec / np.linalg.norm(in_vec) * smooth_radius
 
-        out_vec = (next_ - current)
+        out_vec = next_ - current
         out_vec = out_vec / np.linalg.norm(out_vec) * smooth_radius
 
         corner_start = current - in_vec
@@ -46,10 +49,14 @@ def create_soft_polygon(ax, origin, size, sides, color, smoothing=0.1, thickness
     patch = PathPatch(shape_path, facecolor=color, edgecolor=color, lw=thickness)
     ax.add_patch(patch)
 
+
 def create_star_shape(ax, center, size, color, softness=0.12, stroke=2):
     star_angles = np.linspace(0, 2 * np.pi, 10, endpoint=False)
     radii = np.tile([size, size * 0.5], 5)
-    star_points = np.stack((np.cos(star_angles) * radii, np.sin(star_angles) * radii), axis=1) + center
+    star_points = (
+        np.stack((np.cos(star_angles) * radii, np.sin(star_angles) * radii), axis=1)
+        + center
+    )
 
     bezier_points = []
     bezier_cmds = []
@@ -85,17 +92,19 @@ def create_star_shape(ax, center, size, color, softness=0.12, stroke=2):
     patch = PathPatch(final_path, facecolor=color, edgecolor=color, lw=stroke)
     ax.add_patch(patch)
 
+
 def does_overlap(new_c, new_r, existing, gap=1.15):
-    for (c, r) in existing:
+    for c, r in existing:
         if np.linalg.norm(np.array(c) - np.array(new_c)) < (r + new_r) * gap:
             return True
     return False
+
 
 def visualize_and_detect():
     fig, ax = plt.subplots(figsize=(12, 12))
     ax.set_xlim(-2, 2)
     ax.set_ylim(-2, 2)
-    ax.axis('off')
+    ax.axis("off")
     ax.set_facecolor("black")
 
     shape_types = ["star", "triangle", "square", "pentagon"]
@@ -118,7 +127,7 @@ def visualize_and_detect():
                 create_soft_polygon(ax, pos, rad, sides, color)
 
     img_path = "generated_output.png"
-    plt.savefig(img_path, facecolor='black', bbox_inches='tight')
+    plt.savefig(img_path, facecolor="black", bbox_inches="tight")
     plt.close()
 
     img = cv2.imread(img_path)
@@ -135,7 +144,7 @@ def visualize_and_detect():
     bounds = {
         1: (np.array([20, 100, 100]), np.array([30, 255, 255])),
         2: (np.array([0, 100, 100]), np.array([10, 255, 255])),
-        3: (np.array([100, 100, 100]), np.array([130, 255, 255]))
+        3: (np.array([100, 100, 100]), np.array([130, 255, 255])),
     }
 
     lower, upper = bounds.get(selected, (None, None))
@@ -170,5 +179,6 @@ def visualize_and_detect():
     cv2.destroyAllWindows()
 
     print("Завершено.")
+
 
 visualize_and_detect()

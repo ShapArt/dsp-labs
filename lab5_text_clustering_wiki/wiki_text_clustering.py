@@ -1,14 +1,14 @@
-import wikipedia
-import spacy
-import re
-from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.cluster import KMeans, AgglomerativeClustering, DBSCAN
-from sklearn.decomposition import PCA
-from sklearn.manifold import TSNE
-from scipy.cluster.hierarchy import linkage, dendrogram
-from scipy.sparse import save_npz
-import matplotlib.pyplot as plt
 from collections import defaultdict
+
+import matplotlib.pyplot as plt
+import spacy
+import wikipedia
+from scipy.cluster.hierarchy import dendrogram, linkage
+from scipy.sparse import save_npz
+from sklearn.cluster import DBSCAN, AgglomerativeClustering, KMeans
+from sklearn.decomposition import PCA
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.manifold import TSNE
 
 # 1. Сбор статей
 TOPICS = ["Classical music", "Film", "Painting"]
@@ -62,7 +62,7 @@ for k in ks:
     km.fit(X.toarray())
     inertias.append(km.inertia_)
 plt.figure(figsize=(6, 4))
-plt.plot(ks, inertias, marker='o')
+plt.plot(ks, inertias, marker="o")
 plt.xlabel("Number of clusters (k)")
 plt.ylabel("Inertia (WCSS)")
 plt.title("Elbow Method")
@@ -77,9 +77,10 @@ k_opt = 3  # локоть показывает 3
 labels_km = KMeans(n_clusters=k_opt, random_state=42).fit_predict(X.toarray())
 X_pca = PCA(n_components=2, random_state=42).fit_transform(X.toarray())
 plt.figure(figsize=(6, 6))
-plt.scatter(X_pca[:,0], X_pca[:,1], c=labels_km, cmap="tab10", s=50)
+plt.scatter(X_pca[:, 0], X_pca[:, 1], c=labels_km, cmap="tab10", s=50)
 plt.title("K-Means Clusters (PCA Projection)")
-plt.xlabel("PC1"); plt.ylabel("PC2")
+plt.xlabel("PC1")
+plt.ylabel("PC2")
 plt.tight_layout()
 plt.savefig("kmeans_pca.png")
 plt.close()
@@ -88,7 +89,9 @@ print("Saved kmeans_pca.png")
 # 6. Иерархическая кластеризация
 Z = linkage(X.toarray(), method="ward")
 plt.figure(figsize=(8, 6))
-dendrogram(Z, labels=[t[:20] for t in article_titles], leaf_rotation=90, leaf_font_size=8)
+dendrogram(
+    Z, labels=[t[:20] for t in article_titles], leaf_rotation=90, leaf_font_size=8
+)
 plt.title("Hierarchical Clustering Dendrogram (Ward)")
 plt.tight_layout()
 plt.savefig("dendrogram.png")
@@ -99,13 +102,15 @@ print("Saved dendrogram.png")
 tsne_emb = TSNE(n_components=2, random_state=42).fit_transform(X.toarray())
 labels_db = DBSCAN(eps=0.65, min_samples=3).fit_predict(tsne_emb)
 plt.figure(figsize=(6, 6))
-plt.scatter(tsne_emb[:,0], tsne_emb[:,1], c=labels_db, cmap="tab10", s=50)
+plt.scatter(tsne_emb[:, 0], tsne_emb[:, 1], c=labels_db, cmap="tab10", s=50)
 plt.title("DBSCAN on t-SNE Embedding")
-plt.xlabel("t-SNE 1"); plt.ylabel("t-SNE 2")
+plt.xlabel("t-SNE 1")
+plt.ylabel("t-SNE 2")
 plt.tight_layout()
 plt.savefig("dbscan_tsne.png")
 plt.close()
 print("Saved dbscan_tsne.png")
+
 
 # 8. Вывод и сохранение результатов
 def format_clusters(labels, titles):
@@ -117,6 +122,7 @@ def format_clusters(labels, titles):
         out.append(f"Cluster {cid}:")
         out += [f"  - {d}" for d in docs]
     return "\n".join(out)
+
 
 labels_hc = AgglomerativeClustering(n_clusters=k_opt).fit_predict(X.toarray())
 
@@ -136,10 +142,13 @@ with open("clustering_results.txt", "w", encoding="utf-8") as f:
     f.write(format_clusters(labels_db, article_titles) + "\n")
 
 # 9. Сохранение текстов
-with open("articles_raw.txt", "w", encoding="utf-8") as f_raw, \
-     open("articles_cleaned.txt", "w", encoding="utf-8") as f_clean:
+with open("articles_raw.txt", "w", encoding="utf-8") as f_raw, open(
+    "articles_cleaned.txt", "w", encoding="utf-8"
+) as f_clean:
     last = None
-    for tp, ttl, raw, clean in zip(article_topics, article_titles, article_texts, clean_texts):
+    for tp, ttl, raw, clean in zip(
+        article_topics, article_titles, article_texts, clean_texts
+    ):
         if tp != last:
             f_raw.write(f"\n>>> Topic: {tp} <<<\n")
             f_clean.write(f"\n>>> Topic: {tp} <<<\n")
