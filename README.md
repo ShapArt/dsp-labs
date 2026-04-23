@@ -7,34 +7,33 @@
 [![License](https://img.shields.io/github/license/ShapArt/=for-the-badge)](https://github.com/ShapArt/dsp-labs/blob/main/LICENSE)
 
 ## RU
-Collection of CV/ML/NLP labs with per-lab requirements and experiments.
+**Слоган:** Практика ML без воды
 
-### Зачем этот проект
-- Лабораторные эксперименты CV/ML/NLP
-- Ориентирован на практическое использование, а не «учебный шаблон».
-- Поддерживает единый стандарт качества профиля и репозиториев.
+Коллекция лабораторных CV/ML/NLP для прокачки навыков на реальных задачах.
+
+### Что даёт проект
+- Быстрый запуск и понятный вход в задачу.
+- Практичный сценарий использования, а не «игрушечный» демо-кейс.
+- Поддерживаемая структура для роста и автоматизации.
 
 ### Быстрый старт
-- Создай виртуальное окружение
-- Установи зависимости из requirements.txt
-- Запусти основной модуль по инструкции репозитория
+- Открой README/структуру проекта.
+- Запусти команды из текущего репозитория.
+- Используй шаблоны в .github/ для стандартизированного вклада.
 
 ### Для кого
-- Разработчики backend/automation решений.
-- Команды, которым нужна понятная архитектура и предсказуемый запуск.
+- Инженеры, которым важен результат, а не шум.
+- Команды, ценящие скорость внедрения и качество кода.
 
 ## EN
-Collection of CV/ML/NLP labs with per-lab requirements and experiments.
+**Tagline:** Практика ML без воды
 
-### Why this project
-- Лабораторные эксперименты CV/ML/NLP
-- Built for practical delivery, not just a demo.
-- Follows a consistent engineering quality standard.
+Hands-on CV/ML/NLP lab collection for practical learning.
 
-### Quick start
-- Create virtual environment
-- Install requirements
-- Run main module from docs
+### Value proposition
+- Fast onboarding and clear project intent.
+- Production-minded structure for scaling and automation.
+- Consistent contribution and quality standards.
 
 ## Contribution
 See .github/CONTRIBUTING.md.
