@@ -1,44 +1,35 @@
 # dsp-labs
 
-![Social Preview](https://raw.githubusercontent.com/ShapArt/dsp-labs/main/.github/social-preview.png)
+Academic lab archive for digital signal processing and related practical assignments.
 
-[![Stars](https://img.shields.io/github/stars/ShapArt/dsp-labs?style=for-the-badge)](https://github.com/ShapArt/dsp-labs/stargazers)
-[![Last Commit](https://img.shields.io/github/last-commit/ShapArt/dsp-labs?style=for-the-badge)](https://github.com/ShapArt/dsp-labs/commits/main)
-[![License](https://img.shields.io/github/license/ShapArt/dsp-labs?style=for-the-badge)](https://github.com/ShapArt/dsp-labs/blob/main/LICENSE)
+## What this repository is
+
+`dsp-labs` is best positioned as a coursework repository.
+
+Its role in the portfolio is not to pretend to be a product. Its role is to show structured practice with signal-processing concepts, lab work, and experiment-style technical tasks.
+
+## Why it matters
+
+DSP work is useful because it builds intuition around signals, transforms, filtering, sampling, and numerical experimentation. Even when a repository is academic, it can still show technical discipline if the structure is clear.
+
+## Portfolio positioning
+
+This is a secondary academic repository.
+
+It should stay compact and honest: a lab collection that supports the broader engineering profile, especially when paired with stronger applied projects.
+
+## What would make it stronger
+
+- list of lab topics;
+- tools or languages used;
+- one sample plot or output;
+- run instructions for each lab;
+- short explanation of the main DSP concepts covered.
 
 ## RU
-**Слоган:** Практика ML без воды
 
-Коллекция лабораторных CV/ML/NLP для прокачки навыков на реальных задачах.
-
-### Что даёт проект
-- Быстрый запуск и понятный вход в задачу.
-- Практичный сценарий использования, а не «игрушечный» демо-кейс.
-- Поддерживаемая структура для роста и автоматизации.
-
-### Быстрый старт
-- Открой README/структуру проекта.
-- Запусти команды из текущего репозитория.
-- Используй шаблоны в .github/ для стандартизированного вклада.
-
-### Для кого
-- Инженеры, которым важен результат, а не шум.
-- Команды, ценящие скорость внедрения и качество кода.
-
-## EN
-**Tagline:** Практика ML без воды
-
-Hands-on CV/ML/NLP lab collection for practical learning.
-
-### Value proposition
-- Fast onboarding and clear project intent.
-- Production-minded structure for scaling and automation.
-- Consistent contribution and quality standards.
-
-## Contribution
-See .github/CONTRIBUTING.md.
+Архив лабораторных работ по цифровой обработке сигналов. Лучше всего подавать его как учебный репозиторий: структурированная практика, понятные темы, без попытки выдать coursework за промышленный продукт.
 
 ## License
-See LICENSE.
 
-
+See `LICENSE`.
